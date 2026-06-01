@@ -291,6 +291,7 @@
     font-weight: 700;
     font-size: 0.85rem;
     cursor: pointer;
+    text-decoration: none;
   }
 
   .icon-circle-white {
@@ -320,6 +321,7 @@
     font-weight: 700;
     font-size: 0.85rem;
     cursor: pointer;
+    text-decoration: none;
   }
 
   .btn-icon-green {
@@ -335,6 +337,7 @@
     font-weight: bold;
     font-size: 1.2rem;
     cursor: pointer;
+    text-decoration: none;
   }
 
   .pulse-icon {
@@ -662,6 +665,7 @@
     cursor: none;
     transition: transform 0.3s ease;
     will-change: transform, box-shadow;
+    text-decoration: none;
   }
 
   .btn-white-circle {
@@ -679,6 +683,7 @@
     cursor: none;
     transition: transform 0.3s ease;
     will-change: transform, box-shadow;
+    text-decoration: none;
   }
 
   .btn-green-pill:hover, .btn-white-circle:hover {
