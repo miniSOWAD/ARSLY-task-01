@@ -74,6 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Floating Book Button Animation
   const floatingBookButton = document.querySelector(".floating-book-button");
   if (floatingBookButton && window.gsap) {
     gsap.to(floatingBookButton, {
@@ -96,6 +97,37 @@ window.addEventListener("DOMContentLoaded", () => {
 
     floatingBookButton.addEventListener("mouseleave", () => {
       gsap.to(floatingBookButton, {
+        scale: 1,
+        rotation: 0,
+        duration: 0.35,
+        ease: "power2.out"
+      });
+    });
+  }
+
+  // Floating GitHub Button Animation
+  const floatingGitHubButton = document.querySelector(".floating-github-button");
+  if (floatingGitHubButton && window.gsap) {
+    gsap.to(floatingGitHubButton, {
+      y: 0,
+      scale: 1,
+      opacity: 1,
+      duration: 0.9,
+      ease: "back.out(1.7)",
+      delay: 0.45
+    });
+
+    floatingGitHubButton.addEventListener("mouseenter", () => {
+      gsap.to(floatingGitHubButton, {
+        scale: 1.1,
+        rotation: 2,
+        duration: 0.35,
+        ease: "power2.out"
+      });
+    });
+
+    floatingGitHubButton.addEventListener("mouseleave", () => {
+      gsap.to(floatingGitHubButton, {
         scale: 1,
         rotation: 0,
         duration: 0.35,
