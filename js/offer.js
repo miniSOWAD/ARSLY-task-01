@@ -1,5 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
   if (!window.gsap) return;
+  if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
   const sectionTitle = document.getElementById("splitSectionTitle");
   if (sectionTitle && !sectionTitle.classList.contains("is-split")) {
@@ -19,21 +20,54 @@ window.addEventListener("DOMContentLoaded", () => {
     heading.classList.add("is-split");
   }
 
-  gsap.set(".eyebrow-accent-line, .long-faint-line", { scaleX: 0, transformOrigin: "left center" });
+  function replayOfferIntro() {
+    gsap.killTweensOf([
+      ".char",
+      ".btn-solid-green",
+      ".main-image-wrapper",
+      ".main-image",
+      ".solution-pagination",
+      ".word",
+      ".content-desc",
+      ".pill-tag",
+      ".cta-group",
+      ".sub-image-wrapper"
+    ]);
 
-  const tlSection2 = gsap.timeline({ delay: 0.15 });
+    gsap.set(".char", { y: "110%" });
+    gsap.set(".word", { y: "110%" });
+    gsap.set(".btn-solid-green", { x: 40, opacity: 0 });
+    gsap.set(".main-image-wrapper", { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" });
+    gsap.set(".main-image", { scale: 1.08 });
+    gsap.set(".solution-pagination", { x: -20, opacity: 0 });
+    gsap.set(".content-desc", { y: 20, opacity: 0 });
+    gsap.set(".pill-tag", { scale: 0.8, opacity: 0 });
+    gsap.set(".cta-group", { y: 20, opacity: 0 });
+    gsap.set(".sub-image-wrapper", { scale: 0.8, opacity: 0 });
 
-  tlSection2.to(".eyebrow-accent-line", { scaleX: 1, duration: 0.4, ease: "power3.out" }, 0);
-  tlSection2.to(".long-faint-line", { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, 0.2);
-  tlSection2.from(".eyebrow-text", { y: -15, opacity: 0, duration: 0.5, ease: "power2.out" }, 0.2);
-  tlSection2.from(".char", { y: "110%", duration: 0.8, stagger: 0.03, ease: "expo.out" }, 0.3);
-  tlSection2.from(".btn-solid-green", { x: 40, opacity: 0, duration: 0.8, ease: "back.out(1.5)" }, 0.5);
-  tlSection2.to(".main-image-wrapper", { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1.2, ease: "power4.inOut" }, 0.6);
-  tlSection2.to(".main-image", { scale: 1, duration: 1.2, ease: "power4.inOut" }, 0.6);
-  tlSection2.from(".solution-pagination", { x: -20, opacity: 0, duration: 0.8, ease: "power2.out" }, 1.0);
-  tlSection2.from(".word", { y: "110%", duration: 0.8, stagger: 0.05, ease: "power3.out" }, 0.8);
-  tlSection2.from(".content-desc", { y: 20, opacity: 0, duration: 0.8, ease: "power2.out" }, 1.0);
-  tlSection2.from(".pill-tag", { scale: 0.8, opacity: 0, duration: 0.6, stagger: 0.08, ease: "back.out(1.5)" }, 1.2);
-  tlSection2.from(".cta-group", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, 1.4);
-  tlSection2.from(".sub-image-wrapper", { scale: 0.8, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" }, 1.3);
+    const tlSection2 = gsap.timeline();
+
+    tlSection2.to(".char", { y: "0%", duration: 0.8, stagger: 0.03, ease: "expo.out" }, 0.05);
+    tlSection2.to(".btn-solid-green", { x: 0, opacity: 1, duration: 0.8, ease: "back.out(1.5)" }, 0.2);
+    tlSection2.to(".main-image-wrapper", { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1.2, ease: "power4.inOut" }, 0.3);
+    tlSection2.to(".main-image", { scale: 1, duration: 1.2, ease: "power4.inOut" }, 0.3);
+    tlSection2.to(".solution-pagination", { x: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 0.65);
+    tlSection2.to(".word", { y: "0%", duration: 0.8, stagger: 0.05, ease: "power3.out" }, 0.5);
+    tlSection2.to(".content-desc", { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 0.75);
+    tlSection2.to(".pill-tag", { scale: 1, opacity: 1, duration: 0.6, stagger: 0.08, ease: "back.out(1.5)" }, 0.9);
+    tlSection2.to(".cta-group", { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 1.1);
+    tlSection2.to(".sub-image-wrapper", { scale: 1, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power3.out" }, 1.0);
+  }
+
+  if (window.ScrollTrigger) {
+    ScrollTrigger.create({
+      trigger: "#brandSolution",
+      start: "top 55%",
+      end: "bottom 45%",
+      onEnter: replayOfferIntro,
+      onEnterBack: replayOfferIntro
+    });
+  } else {
+    replayOfferIntro();
+  }
 });

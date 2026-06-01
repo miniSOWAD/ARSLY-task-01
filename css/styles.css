@@ -1139,3 +1139,18 @@ html { scroll-behavior: smooth; }
     text-overflow: ellipsis;
   }
 }
+
+/* ── FINAL PATCH: clean one-name-only scroll spy behavior ───────── */
+.spy-zone {
+  visibility: hidden;
+}
+
+.spy-zone.active {
+  visibility: visible;
+}
+
+/* The section labels now belong only to the fixed navbar. */
+.cta-top-divider,
+.top-line-container {
+  display: none !important;
+}

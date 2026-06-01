@@ -13,3 +13,7 @@ Navbar behavior:
 - Middle area shows `WHAT WE OFFER` only when the What We Offer section is active.
 - Right area shows `START YOUR PROJECT WITH US` only when the CTA section is active.
 - The duplicate CTA internal eyebrow line has been removed, so there is only one section-label navbar.
+
+Final patch:
+- Scroll spy now hides inactive nav labels with GSAP inline-state control, so only the current section name remains visible.
+- Section entrance animations replay on both downward and upward scroll re-entry.

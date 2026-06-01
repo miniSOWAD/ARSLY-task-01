@@ -1,5 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
   if (!window.gsap) return;
+  if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
   const assetsFolder = [
     {
@@ -92,13 +93,34 @@ window.addEventListener("DOMContentLoaded", () => {
     titleEl.classList.add("is-split");
   }
 
-  gsap.fromTo(".char-s1", { y: "110%" }, {
-    y: "0%",
-    duration: 0.8,
-    stagger: 0.03,
-    ease: "expo.out",
-    delay: 0.2
-  });
+  function replayHomeIntro() {
+    gsap.killTweensOf(".char-s1");
+    gsap.fromTo(".char-s1", { y: "110%" }, {
+      y: "0%",
+      duration: 0.8,
+      stagger: 0.03,
+      ease: "expo.out"
+    });
+
+    gsap.fromTo(".section-eyebrow", { y: 14, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      duration: 0.55,
+      ease: "power2.out"
+    });
+  }
+
+  if (window.ScrollTrigger) {
+    ScrollTrigger.create({
+      trigger: "#featuredWorks",
+      start: "top 55%",
+      end: "bottom 45%",
+      onEnter: replayHomeIntro,
+      onEnterBack: replayHomeIntro
+    });
+  } else {
+    replayHomeIntro();
+  }
 
   let currentIndex = 0;
   let isAnimating = false;
