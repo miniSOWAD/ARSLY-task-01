@@ -19,7 +19,37 @@ window.addEventListener("DOMContentLoaded", () => {
     ctaHeading.classList.add("is-split");
   }
 
+  let floatingWaterTweens = [];
+
+  function stopFloatingWater() {
+    floatingWaterTweens.forEach(tween => tween.kill());
+    floatingWaterTweens = [];
+  }
+
+  function startFloatingWater() {
+    stopFloatingWater();
+
+    gsap.utils.toArray(".floating-img").forEach((img, i) => {
+      const tween = gsap.to(img, {
+        x: () => gsap.utils.random(-18, 18),
+        y: () => gsap.utils.random(-34, 34),
+        rotation: () => gsap.utils.random(-7, 7),
+        scale: () => gsap.utils.random(0.97, 1.04),
+        duration: () => gsap.utils.random(3.8, 6.5),
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        repeatRefresh: true,
+        delay: i * 0.22
+      });
+
+      floatingWaterTweens.push(tween);
+    });
+  }
+
   function replayCtaIntro() {
+    stopFloatingWater();
+
     gsap.killTweensOf([
       ".cta-section",
       ".word-cta",
@@ -33,9 +63,17 @@ window.addEventListener("DOMContentLoaded", () => {
     gsap.set(".word-cta", { y: "110%" });
     gsap.set(".cta-contact-info span", { y: 20, opacity: 0 });
     gsap.set(".btn-green-pill, .btn-white-circle", { scale: 0.5, opacity: 0, boxShadow: "0 0 0 rgba(200, 255, 0, 0)" });
-    gsap.set(".floating-img", { scale: 0, opacity: 0, rotation: () => gsap.utils.random(-15, 15) });
+    gsap.set(".floating-img", {
+      x: 0,
+      y: 0,
+      scale: 0,
+      opacity: 0,
+      rotation: () => gsap.utils.random(-15, 15)
+    });
 
-    const tlCta = gsap.timeline();
+    const tlCta = gsap.timeline({
+      onComplete: startFloatingWater
+    });
 
     tlCta.to(".cta-section", { filter: "blur(0px)", opacity: 1, duration: 1.25, ease: "power2.out" }, 0);
     tlCta.to(".word-cta", { y: "0%", duration: 0.9, stagger: 0.08, ease: "expo.out" }, 0.35);
@@ -50,27 +88,36 @@ window.addEventListener("DOMContentLoaded", () => {
       start: "top 55%",
       end: "bottom 45%",
       onEnter: replayCtaIntro,
-      onEnterBack: replayCtaIntro
+      onEnterBack: replayCtaIntro,
+      onLeave: stopFloatingWater,
+      onLeaveBack: stopFloatingWater
     });
   } else {
     replayCtaIntro();
   }
 
-  gsap.utils.toArray(".floating-img").forEach((img, i) => {
-    gsap.to(img, {
-      y: () => gsap.utils.random(-25, 25),
-      x: () => gsap.utils.random(-10, 10),
-      rotation: () => gsap.utils.random(-5, 5),
-      duration: () => gsap.utils.random(3, 6),
-      ease: "sine.inOut",
-      yoyo: true,
-      repeat: -1,
-      delay: 1.6 + i * 0.2
-    });
+  gsap.to(".glow-red", {
+    x: 70,
+    y: 45,
+    scale: 1.12,
+    duration: 8,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -1,
+    repeatRefresh: true
   });
 
-  gsap.to(".glow-red", { x: 50, y: 50, scale: 1.1, duration: 8, ease: "sine.inOut", yoyo: true, repeat: -1 });
-  gsap.to(".glow-purple", { x: -50, y: -50, scale: 1.2, duration: 10, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 2 });
+  gsap.to(".glow-purple", {
+    x: -65,
+    y: -55,
+    scale: 1.22,
+    duration: 10,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -1,
+    repeatRefresh: true,
+    delay: 2
+  });
 
   document.querySelectorAll(".btn-green-pill, .btn-white-circle").forEach(btn => {
     btn.addEventListener("mouseenter", () => {

@@ -3,6 +3,43 @@ window.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin(ScrollTrigger);
   }
 
+  const instantWelcomeOverlay = document.getElementById("instantWelcomeOverlay");
+  if (instantWelcomeOverlay) {
+    const alreadySeen = sessionStorage.getItem("miniSOWADWelcomeSeen") === "true";
+
+    if (alreadySeen) {
+      instantWelcomeOverlay.remove();
+    } else {
+      document.body.classList.add("welcome-lock");
+
+      if (window.gsap) {
+        const tl = gsap.timeline();
+        tl.fromTo(
+          "#instantWelcomeOverlay .welcome-title",
+          { y: 80, opacity: 0, filter: "blur(14px)" },
+          { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.8, ease: "expo.out" }
+        )
+          .fromTo(
+            "#instantWelcomeOverlay .welcome-subtitle",
+            { y: 22, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
+            "-=0.45"
+          )
+          .to(
+            "#instantWelcomeOverlay",
+            { opacity: 0, filter: "blur(16px)", duration: 0.45, ease: "power2.inOut" },
+            1.55
+          );
+      }
+
+      setTimeout(() => {
+        sessionStorage.setItem("miniSOWADWelcomeSeen", "true");
+        instantWelcomeOverlay.remove();
+        document.body.classList.remove("welcome-lock");
+      }, 2000);
+    }
+  }
+
   const dot = document.getElementById("cursorDot");
   const ring = document.getElementById("cursorRing");
 
@@ -36,4 +73,35 @@ window.addEventListener("DOMContentLoaded", () => {
       gsap.to(dot, { backgroundColor: "#fff", scale: 1, duration: 0.2 });
     });
   });
+
+  const floatingBookButton = document.querySelector(".floating-book-button");
+  if (floatingBookButton && window.gsap) {
+    gsap.to(floatingBookButton, {
+      y: 0,
+      scale: 1,
+      opacity: 1,
+      duration: 0.9,
+      ease: "back.out(1.7)",
+      delay: 0.45
+    });
+
+    floatingBookButton.addEventListener("mouseenter", () => {
+      gsap.to(floatingBookButton, {
+        scale: 1.1,
+        rotation: 2,
+        duration: 0.35,
+        ease: "power2.out"
+      });
+    });
+
+    floatingBookButton.addEventListener("mouseleave", () => {
+      gsap.to(floatingBookButton, {
+        scale: 1,
+        rotation: 0,
+        duration: 0.35,
+        ease: "power2.out"
+      });
+    });
+  }
+
 });

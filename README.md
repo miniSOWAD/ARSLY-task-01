@@ -17,3 +17,20 @@ Navbar behavior:
 Final patch:
 - Scroll spy now hides inactive nav labels with GSAP inline-state control, so only the current section name remains visible.
 - Section entrance animations replay on both downward and upward scroll re-entry.
+
+
+## Floating Book Button
+
+The fixed bottom-right book button is inside `home.html` near the end of the body.
+Change this line to your own destination:
+
+```html
+href="https://example.com"
+```
+
+The button styling is in `css/styles.css` under `Floating Book Link Button`.
+The entrance and hover motion is in `js/common.js`.
+
+
+## Welcome behavior
+Open `index.html` first. It shows the welcome animation for 2 seconds, stores a session flag, then opens `home.html`. If someone opens `home.html` directly, it shows the same 2-second welcome overlay once for that browser tab. To test the welcome again, close/reopen the tab or clear sessionStorage in DevTools.

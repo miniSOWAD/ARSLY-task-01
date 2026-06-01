@@ -844,6 +844,9 @@ html { scroll-behavior: smooth; }
 }
 
 .welcome-title {
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(80px);
   font-family: 'Bebas Neue', 'Impact', sans-serif;
   font-size: clamp(4rem, 10vw, 11rem);
   line-height: 0.95;
@@ -855,6 +858,8 @@ html { scroll-behavior: smooth; }
 .welcome-title span { color: #c8ff00; }
 
 .welcome-subtitle {
+  opacity: 0;
+  transform: translateY(22px);
   margin-top: 24px;
   color: #a0a0a0;
   font-family: 'Syne', sans-serif;
@@ -884,6 +889,51 @@ html { scroll-behavior: smooth; }
 
 @keyframes welcomeLoad {
   to { transform: scaleX(1); }
+}
+
+
+/* Direct-home welcome overlay fallback */
+.instant-welcome-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #121212;
+  overflow: hidden;
+}
+
+.instant-welcome-overlay::before,
+.instant-welcome-overlay::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(110px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.instant-welcome-overlay::before {
+  width: 420px;
+  height: 420px;
+  background: #c8ff00;
+  top: 12%;
+  left: 10%;
+}
+
+.instant-welcome-overlay::after {
+  width: 520px;
+  height: 520px;
+  background: #5a189a;
+  bottom: 8%;
+  right: 8%;
+}
+
+body.welcome-lock {
+  overflow: hidden;
 }
 
 @media (max-width: 860px) {
@@ -1153,4 +1203,150 @@ html { scroll-behavior: smooth; }
 .cta-top-divider,
 .top-line-container {
   display: none !important;
+}
+
+
+/* ── Floating Book Link Button ─────────────────────────────────── */
+.floating-book-button {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  width: 66px;
+  height: 66px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(80px) scale(0.95);
+}
+
+.book-button-glow {
+  position: absolute;
+  inset: -7px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #dfff7a, #c8ff00, #7dff6a);
+  filter: blur(18px);
+  opacity: 0.42;
+  animation: bookGlowPulse 2.5s ease-in-out infinite;
+}
+
+.book-button-core {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #101010;
+  background: linear-gradient(135deg, #f3ffd1 0%, #c8ff00 48%, #7dff6a 100%);
+  box-shadow: 0 18px 45px rgba(200, 255, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  animation: bookCoreFloat 2.2s ease-in-out infinite;
+}
+
+.book-button-icon {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  animation: bookIconDrift 2s ease-in-out infinite;
+}
+
+.book-button-icon svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.book-button-wave {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.book-button-wave svg {
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 100%;
+}
+
+.book-button-wave path {
+  fill: rgba(255, 255, 255, 0.22);
+}
+
+.book-button-tooltip {
+  position: absolute;
+  right: 82px;
+  bottom: 18px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(200, 255, 0, 0.65);
+  background: rgba(245, 255, 220, 0.98);
+  color: #101010;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(12px) translateX(8px);
+  pointer-events: none;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.floating-book-button:hover .book-button-tooltip {
+  opacity: 1;
+  transform: translateY(-6px) translateX(0);
+}
+
+.floating-book-button:hover .book-button-core {
+  box-shadow: 0 20px 55px rgba(200, 255, 0, 0.48), 0 0 32px rgba(125, 255, 106, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+@keyframes bookGlowPulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.38; }
+  50% { transform: scale(1.2) rotate(3deg); opacity: 0.62; }
+}
+
+@keyframes bookCoreFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(2deg); }
+  50% { transform: translateY(0) rotate(-2deg); }
+  75% { transform: translateY(2px) rotate(1deg); }
+}
+
+@keyframes bookIconDrift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(2deg); }
+  50% { transform: translateY(0) rotate(-2deg); }
+  75% { transform: translateY(2px) rotate(0deg); }
+}
+
+@media (max-width: 700px) {
+  .floating-book-button {
+    right: 1.1rem;
+    bottom: 1.1rem;
+    width: 58px;
+    height: 58px;
+  }
+
+  .book-button-tooltip {
+    display: none;
+  }
 }
