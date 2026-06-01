@@ -1,0 +1,917 @@
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #121212;
+    --text: #ffffff;
+    --muted: #a0a0a0;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* --- Custom Cursor --- */
+  .cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: 6px; height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+  }
+
+  .cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+  }
+
+  /* --- Spacer Sections to allow page scrolling --- */
+  .spacer {
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* --- Headers --- */
+  .featured-section {
+    position: relative;
+    padding: 80px 0;
+    width: 100vw;
+    overflow: hidden; 
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', 'Impact', sans-serif;
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+    letter-spacing: 2px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .eyebrow-line {
+    width: 60px;
+    height: 1px;
+    background: #333;
+  }
+
+  /* --- Dynamic Carousel Container --- */
+  .carousel-container {
+    position: relative;
+    width: 100vw;
+    height: 50vh;
+    min-height: 440px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* --- Base Card Styles --- */
+  .card {
+    position: absolute;
+    width: 34vw; 
+    min-width: 360px;
+    max-width: 740px;
+    height: 100%;
+    cursor: none; 
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .card-img-wrapper {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .card:hover .card-img-wrapper img {
+    transform: scale(1.06);
+  }
+
+  /* --- Text Sitting in the Triangle Voids --- */
+  .left-content {
+    position: absolute;
+    bottom: 20px;
+    left: 15%;
+    z-index: 10;
+    opacity: 0; 
+  }
+  .left-subtitle {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .left-subtitle .dot {
+    width: 4px; height: 4px; background: #c8ff00; border-radius: 50%;
+  }
+  .left-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    white-space: nowrap; /* Prevents awkward wrapping */
+  }
+
+  .right-content {
+    position: absolute;
+    bottom: 20px;
+    right: 15%; /* Safely inside the card */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    z-index: 10;
+    opacity: 0; 
+  }
+  .right-pagination {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--text);
+  }
+  .right-pagination span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .right-tags {
+    display: flex;
+    gap: 8px;
+  }
+  .tag {
+    padding: 6px 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    font-size: 0.65rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /*section 2*******************************************/
+  /* ── Section 2: Brand Solution ─────────────────────────────────── */
+  /* ── Section 2 Layout & Styling ─────────────────────────────────── */
+  .brand-solution {
+    position: relative;
+    padding: 100px 5vw;
+    width: 100vw;
+    background: #121212;
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* --- Header Row --- */
+  .solution-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+
+  .eyebrow-text {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .eyebrow-accent-line {
+    width: 350px;
+    height: 0.01cap;
+    background: #c8ff00; 
+  }
+
+  /* --- New Top Line & Eyebrow Layout --- */
+  .top-line-container {
+    display: flex;
+    align-items: flex-end; /* Aligns the green line and grey line at the bottom */
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .eyebrow-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 15px; /* Tiny gap before the grey line starts */
+  }
+
+  .eyebrow-accent-line {
+    width: 290px; /* Perfectly matches the width of "WHAT WE OFFER" */
+    height: 1px;
+    background: #c8ff00; 
+    transform-origin: left center;
+  }
+
+  .long-faint-line {
+    flex: 1; /* Stretches across the rest of the screen */
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    margin-bottom: 0px;
+    margin-left: -14px; /* Visually aligns it with the 2px green line */
+    transform-origin: left center;
+  }
+
+  /* --- New Main Title & Button Layout --- */
+  .solution-header-main {
+    display: flex;
+    justify-content: space-between; /* Puts Title on left, Button on right */
+    align-items: center;
+    margin-bottom: 60px;
+    padding-left: 140px; /* Small padding to prevent flush left on mobile */
+  }
+
+  .header-title {
+    font-family: 'Bebas Neue', 'Impact', sans-serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* --- Buttons --- */
+  .btn-solid-green {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #c8ff00;
+    color: #121212;
+    border: none;
+    padding: 6px 6px 6px 20px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+
+  .icon-circle-white {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    background: #ffffff;
+    border-radius: 50%;
+    font-weight: bold;
+  }
+
+  /* Bottom CTA Group */
+  .cta-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-dark-pill {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+
+  .btn-icon-green {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: #c8ff00;
+    color: #121212;
+    border: none;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .pulse-icon {
+    animation: pulseGreen 2s infinite;
+  }
+  @keyframes pulseGreen {
+    0% { box-shadow: 0 0 0 0 rgba(200, 255, 0, 0.5); }
+    70% { box-shadow: 0 0 0 12px rgba(200, 255, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(200, 255, 0, 0); }
+  }
+
+  /* --- Main Content Split --- */
+  .solution-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  /* Left Column */
+  .solution-left {
+    display: flex;
+    align-items: center; /* Centers image with the text block next to it */
+    gap: 40px; /* Space between image and the meta block */
+    width: 60%; 
+  }
+
+  .main-image-wrapper {
+    width: 35vw;       /* Takes up 35% of the screen width */
+    max-width: 550px;  /* But stops growing at 550px */
+    aspect-ratio: 1/1; /* Automatically keeps it a perfect square! */
+    flex-shrink: 0; 
+    border-radius: 20px;
+    overflow: hidden;
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  }
+
+  .main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* NEW: Stacks the pagination and tags vertically */
+  .left-meta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 50px; /* Large space between 04/01 and tags */
+  }
+
+  .solution-pagination {
+    font-family: 'Bebas Neue', sans-serif;
+    display: flex;
+    align-items: baseline;
+    margin-bottom: -80px;
+  }
+
+  .big-num { font-size: 3.5rem; line-height: 1; }
+  .small-num { font-size: 1rem; font-family: 'DM Sans', sans-serif; color: #a0a0a0; margin-left: 5px; }
+
+  /* Right Column */
+  .solution-right {
+    width: 40%; /* Right side is narrower now */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .right-text-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    text-align: right;
+    margin-bottom: 20px; /* REDUCED to pull small images closer to text */
+  }
+
+  .content-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  
+  .word-wrap, .char-wrap { display: inline-block; overflow: hidden; vertical-align: top; }
+  .word, .char { display: inline-block;}
+
+  .content-desc {
+    font-size: 0.95rem;
+    color: #a0a0a0;
+    line-height: 1.6;
+    max-width: 90%; 
+  }
+
+  /* Bottom Right Split */
+  .right-bottom-block {
+    display: flex;
+    justify-content: flex-end; /* Pushes small images strictly to the right edge */
+    align-items: flex-end;
+  }
+
+  /* Tags moved to left, keeping CSS the same */
+  .tags-and-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 300px;
+  }
+
+  .tags-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 350px;
+  }
+
+  .pill-tag {
+    padding: 8px 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.15);
+    font-size: 0.75rem;
+    color: #cccccc;
+    background: transparent;
+  }
+
+  .small-images-wrapper {
+    display: flex;
+    gap: 15px;
+  }
+
+  .sub-image-wrapper {
+    width: 180px; /* Larger images as requested */
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sub-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ── Section 3: Call To Action ─────────────────────────────────── */
+  /* ── Section 3: Call To Action ─────────────────────────────────── */
+  /* ── Section 3: Call To Action ─────────────────────────────────── */
+  /* ── Section 3: Call To Action ─────────────────────────────────── */
+  .cta-section {
+    position: relative;
+    padding: 150px 5vw;
+    width: 100vw;
+    min-height: 80vh;
+    background: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Initial state for GSAP Blur reveal */
+    filter: blur(0px);
+    opacity: 1;
+    will-change: filter, opacity;
+  }
+
+  /* --- Background Glows --- */
+  .glow-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+    z-index: 0;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .glow-red {
+    background: #d62828; /* Deep red */
+    width: 400px;
+    height: 400px;
+    top: 30%;
+    left: 10%;
+  }
+
+  .glow-purple {
+    background: #5a189a; /* Deep purple */
+    width: 500px;
+    height: 500px;
+    bottom: 10%;
+    right: 5%;
+  }
+
+  /* --- Floating Images --- */
+  .floating-img {
+    position: absolute;
+    border-radius: 16px;
+    z-index: 2;
+    will-change: transform, opacity;
+    transform-origin: center center;
+    /* Removed overflow: hidden so the glow can bleed out */
+    /* Removed the black box-shadow */
+  }
+
+  /* The crisp, top image */
+  .floating-img .main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px; 
+    position: relative;
+    z-index: 2; 
+  }
+
+  /* The colored, blurred reflection behind it */
+  .floating-img .reflect {
+    position: absolute;
+    top: -25px; /* Pushes the reflection slightly downwards */
+    right: -35px; /* Pushes the reflection slightly to the right */
+    width: 150%;
+    height: 150%;
+    object-fit: cover;
+    border-radius: 16px;
+    filter: blur(25px); /* Creates the soft colored glow */
+    opacity: 0.85; /* Adjust this to make the glow brighter or softer */
+    z-index: 1; /* Puts it behind the main image */
+    transform: scale(0.95); /* Makes the glow slightly smaller than the main image */
+  }
+
+  /* Specific positions matching the screenshot */
+  .float-1 { top: 20%; left: 8%; width: 130px; height: 130px; }
+  .float-2 { bottom: 15%; left: 22%; width: 220px; height: 150px; }
+  .float-3 { top: 25%; right: 8%; width: 120px; height: 120px; }
+  .float-4 { bottom: 20%; right: 18%; width: 160px; height: 160px; }
+  /* --- Centered Content --- */
+  .cta-content-wrapper {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 900px;
+  }
+
+  /* Eyebrow */
+  /* --- The Fixed Top Eyebrow & Line --- */
+  .cta-top-divider {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%); /* Magic trick to make it span the entire screen! */
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* The faint long grey line */
+    margin-bottom: 40px; /* Space between the line and the big heading */
+  }
+
+  .cta-eyebrow-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transform: translateY(1px); /* Pulls the green line exactly down onto the grey line */
+  }
+
+  .cta-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .cta-green-line {
+    width: 100%; /* Perfectly matches the width of the text */
+    height: 2px;
+    background: #c8ff00;
+  }
+
+  /* Main Heading */
+  .cta-heading {
+    font-family: 'Bebas Neue', 'Impact', sans-serif;
+    font-size: clamp(4rem, 7vw, 7.5rem);
+    line-height: 1;
+    letter-spacing: 2px;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+  }
+
+  /* GSAP Text Splitting classes */
+  .word-wrap-cta { 
+    display: inline-block; 
+    overflow: hidden; 
+    vertical-align: top; 
+  }
+  .word-cta { 
+    display: inline-block; 
+    transform: translateY(110%);
+    will-change: transform;
+  }
+
+  /* Contact Info */
+  .cta-contact-info {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  /* --- Fixed Button Spacing --- */
+  .cta-btn-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* FIXED: Reduced from 15px to bring them perfectly close */
+  }
+
+  .btn-green-pill {
+    background: #c8ff00;
+    color: #121212;
+    border: none;
+    padding: 12px 28px; /* Slightly tightened padding to look sharper */
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    cursor: none;
+    transition: transform 0.3s ease;
+    will-change: transform, box-shadow;
+  }
+
+  .btn-white-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px; /* Tweak to match screenshot proportions */
+    height: 42px;
+    background: #ffffff;
+    color: #121212;
+    border: none;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: none;
+    transition: transform 0.3s ease;
+    will-change: transform, box-shadow;
+  }
+
+  .btn-green-pill:hover, .btn-white-circle:hover {
+    transform: scale(1.08);
+  }
+
+
+/* ── Shared Site Shell / Navbar ─────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+.site-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9990;
+  padding: 18px 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(18, 18, 18, 0.72);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', 'Impact', sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+  color: #fff;
+  text-decoration: none;
+  cursor: none;
+}
+
+.nav-logo span { color: #c8ff00; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  color: #a0a0a0;
+  text-decoration: none;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  cursor: none;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #121212;
+  background: #c8ff00;
+  border-color: #c8ff00;
+}
+
+.page-main {
+  padding-top: 84px;
+  min-height: 100vh;
+  background: #121212;
+}
+
+.page-main .featured-section,
+.page-main .brand-solution,
+.page-main .cta-section {
+  min-height: calc(100vh - 84px);
+}
+
+.page-main .featured-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ── Welcome Page ─────────────────────────────────── */
+.welcome-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: #121212;
+}
+
+.welcome-page::before,
+.welcome-page::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(110px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.welcome-page::before {
+  width: 420px;
+  height: 420px;
+  background: #c8ff00;
+  top: 12%;
+  left: 10%;
+}
+
+.welcome-page::after {
+  width: 520px;
+  height: 520px;
+  background: #5a189a;
+  bottom: 8%;
+  right: 8%;
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 5vw;
+}
+
+.welcome-title {
+  font-family: 'Bebas Neue', 'Impact', sans-serif;
+  font-size: clamp(4rem, 10vw, 11rem);
+  line-height: 0.95;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  max-width: 1100px;
+}
+
+.welcome-title span { color: #c8ff00; }
+
+.welcome-subtitle {
+  margin-top: 24px;
+  color: #a0a0a0;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.loading-line {
+  width: min(420px, 70vw);
+  height: 1px;
+  margin: 38px auto 0;
+  background: rgba(255,255,255,0.14);
+  overflow: hidden;
+}
+
+.loading-line span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #c8ff00;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: welcomeLoad 2s ease forwards;
+}
+
+@keyframes welcomeLoad {
+  to { transform: scaleX(1); }
+}
+
+@media (max-width: 860px) {
+  .site-navbar {
+    align-items: flex-start;
+    gap: 16px;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .nav-link {
+    flex: 0 0 auto;
+    font-size: 0.65rem;
+  }
+
+  .page-main {
+    padding-top: 132px;
+  }
+
+  .solution-header-main {
+    padding-left: 0;
+    gap: 20px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .solution-content,
+  .solution-left {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .solution-right {
+    width: 100%;
+  }
+
+  .main-image-wrapper {
+    width: 90vw;
+  }
+
+  .tags-and-cta {
+    margin-top: 60px;
+  }
+
+  .right-text-block {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .right-bottom-block {
+    justify-content: flex-start;
+  }
+
+  .cta-contact-info {
+    flex-direction: column;
+    gap: 12px;
+    font-size: 0.78rem;
+  }
+
+  .floating-img {
+    opacity: 0.65;
+  }
+}

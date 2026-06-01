@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<title>Home | Featured Works</title>
+<script src="js/common.js" defer></script>
+<script src="js/home.js" defer></script>
+</head>
+<body>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav class="site-navbar">
+  <a href="home.html" class="nav-logo">mini<span>SOWAD</span></a>
+  <div class="nav-links">
+    <a class="nav-link active" href="home.html">Home</a>
+    <a class="nav-link" href="what-we-offer.html">What We Offer</a>
+    <a class="nav-link" href="start-project.html">Start Your Project With Us</a>
+  </div>
+</nav>
+<main class="page-main">
+<section class="featured-section" id="featuredWorks">
+  <div class="section-header">
+    <h2 class="section-title">FEATURED WORKS</h2>
+    <div class="section-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span>(003)</span> • <span>ABOUT OUR STUDIO</span>
+    </div>
+  </div>
+
+  <!-- Note: We bind the hover and scroll events specifically to THIS container now -->
+  <div class="carousel-container" id="carousel"></div>
+</section>
+</main>
+</body>
+</html>
