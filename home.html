@@ -8,23 +8,32 @@
 <link rel="stylesheet" href="css/styles.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<title>Home | Featured Works</title>
 <script src="js/common.js" defer></script>
 <script src="js/home.js" defer></script>
+<script src="js/offer.js" defer></script>
+<script src="js/cta.js" defer></script>
+<script src="js/scroll-spy.js" defer></script>
+<title>miniSOWAD | Task Site</title>
 </head>
 <body>
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-<nav class="site-navbar">
-  <a href="home.html" class="nav-logo">mini<span>SOWAD</span></a>
-  <div class="nav-links">
-    <a class="nav-link active" href="home.html">Home</a>
-    <a class="nav-link" href="what-we-offer.html">What We Offer</a>
-    <a class="nav-link" href="start-project.html">Start Your Project With Us</a>
+
+<nav class="site-navbar spy-navbar">
+  <a href="#featuredWorks" class="nav-logo">mini<span>SOWAD</span></a>
+
+  <!-- Three-part scroll-spy navbar:
+       left = Home, middle = What We Offer, right = Start Project.
+       Only the current section label becomes visible. -->
+  <div class="spy-zone-row" id="spyNav">
+    <a href="#featuredWorks" class="spy-zone spy-zone-left active" data-spy-target="featuredWorks">HOME</a>
+    <a href="#brandSolution" class="spy-zone spy-zone-center" data-spy-target="brandSolution">WHAT WE OFFER</a>
+    <a href="#ctaSection" class="spy-zone spy-zone-right" data-spy-target="ctaSection">START YOUR PROJECT WITH US</a>
   </div>
 </nav>
-<main class="page-main">
-<section class="featured-section" id="featuredWorks">
+
+<main class="page-main single-page-main">
+<section class="featured-section snap-section" id="featuredWorks" data-nav-title="HOME">
   <div class="section-header">
     <h2 class="section-title">FEATURED WORKS</h2>
     <div class="section-eyebrow">
@@ -35,6 +44,112 @@
 
   <!-- Note: We bind the hover and scroll events specifically to THIS container now -->
   <div class="carousel-container" id="carousel"></div>
+</section>
+<section class="brand-solution snap-section" id="brandSolution" data-nav-title="WHAT WE OFFER">
+  <div class="solution-header-main">
+    <h2 class="header-title" id="splitSectionTitle">STRONG BRAND SOLUTION</h2>
+    
+    <button class="btn-solid-green">
+      View All Services 
+      <span class="icon-circle-white">↗</span>
+    </button>
+  </div>
+
+  <div class="solution-content">
+    
+    <div class="solution-left">
+      <div class="main-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Blooming Mockup" class="main-image">
+      </div>
+      
+      <div class="left-meta-block">
+        <div class="solution-pagination">
+          <span class="big-num">04</span><span class="small-num">/01</span>
+        </div>
+        
+        <div class="tags-and-cta">
+          <div class="tags-grid">
+            <span class="pill-tag">Brand Strategy</span>
+            <span class="pill-tag">Positioning</span>
+            <span class="pill-tag">Logo</span>
+            <span class="pill-tag">Visual Direction</span>
+            <span class="pill-tag">Brand Guidelines</span>
+          </div>
+          
+          <div class="cta-group">
+            <button class="btn-dark-pill">View Services</button>
+            <button class="btn-icon-green pulse-icon">↗</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="solution-right">
+      <div class="right-text-block">
+        <h3 class="content-heading" id="splitHeading">BRAND STRATEGY &<br>POSITIONING</h3>
+        <p class="content-desc">We create human-centered digital experiences that are beautiful, intuitive, and conversion-focused. Every interaction is designed to feel natural and purposeful.</p>
+      </div>
+
+      <div class="right-bottom-block">
+        <div class="small-images-wrapper">
+          <div class="sub-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=500&auto=format&fit=crop" alt="Aimex Billboard">
+          </div>
+          <div class="sub-image-wrapper">
+            <img src="https://img-0.journaldunet.com/cYYkJk7_GlOsXwDiTyD8qpBTS-M=/1500x/smart/21c5c394bfae40f185494f2becd98263/ccmcms-jdn/39509505.jpeg" alt="Shopping Bags">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+<section class="cta-section snap-section" id="ctaSection" data-nav-title="START YOUR PROJECT WITH US">
+  
+  <!-- Animated Background Glows -->
+  <div class="glow-blob glow-red"></div>
+  <div class="glow-blob glow-purple"></div>
+
+  <!-- Floating Images -->
+  <div class="floating-img float-1">
+    <img src="https://th.bing.com/th/id/OIP.hXWwNOQw15ZVWKlMs-xv0wHaFQ?w=257&h=183&c=7&r=0&o=7&pid=1.7&rm=3" alt="Floating Icon" class="reflect">
+    <img src="https://th.bing.com/th/id/OIP.hXWwNOQw15ZVWKlMs-xv0wHaFQ?w=257&h=183&c=7&r=0&o=7&pid=1.7&rm=3" alt="Floating Icon" class="main-img">
+  </div>
+  
+  <div class="floating-img float-2">
+    <img src="https://th.bing.com/th/id/OIP.dF199vKF2gPkzEhGsIjiTwHaEJ?w=370&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Red Card" class="reflect">
+    <img src="https://th.bing.com/th/id/OIP.dF199vKF2gPkzEhGsIjiTwHaEJ?w=370&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Red Card" class="main-img">
+  </div>
+  
+  <div class="floating-img float-3">
+    <img src="https://th.bing.com/th/id/OIP.6pPkxpUjXiGxUFaHsbmcAQHaHa?w=172&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Dark UI" class="reflect">
+    <img src="https://th.bing.com/th/id/OIP.6pPkxpUjXiGxUFaHsbmcAQHaHa?w=172&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Dark UI" class="main-img">
+  </div>
+  
+  <div class="floating-img float-4">
+    <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=800&auto=format&fit=crop" alt="Purple Card" class="reflect">
+    <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=800&auto=format&fit=crop" alt="Purple Card" class="main-img">
+  </div>
+
+  <!-- Centered Content Wrapper -->
+  <div class="cta-content-wrapper">
+    
+    <!-- Main Heading -->
+    <h2 class="cta-heading" id="splitCtaHeading">LET'S BUILD SOMETHING<br>TOGETHER</h2>
+
+    <!-- Contact Info -->
+    <div class="cta-contact-info">
+      <span>[ baisakh2015@gmail.com ]</span>
+      <span>[ +8801977987420 ]</span>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="cta-btn-wrapper">
+      <button class="btn-green-pill">Contact Us</button>
+      <button class="btn-white-circle pulse-icon">↗</button>
+    </div>
+
+  </div>
 </section>
 </main>
 </body>

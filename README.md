@@ -1,30 +1,15 @@
-# miniSOWAD Task Site - Structured Version
+# miniSOWAD Task Site - Single Page Scroll Spy
 
-This version splits the original single HTML file into a cleaner static project.
+Open `index.html` with VS Code Live Server.
 
-## Pages
+Flow:
+1. `index.html` shows the welcome screen.
+2. After 2 seconds it redirects to `home.html`.
+3. `home.html` contains all three sections in one scrollable page.
 
-- `index.html` - Welcome screen. Redirects to Home after 2 seconds.
-- `home.html` - Section 1 / Featured Works carousel.
-- `what-we-offer.html` - Section 2 / Strong Brand Solution.
-- `start-project.html` - Section 3 / CTA section.
-
-## Shared files
-
-- `css/styles.css` - All shared and section CSS.
-- `js/common.js` - Custom cursor and shared hover behavior.
-- `js/welcome.js` - Welcome screen animation and redirect.
-- `js/home.js` - Featured Works carousel data and animation.
-- `js/offer.js` - What We Offer section animation.
-- `js/cta.js` - CTA section animation.
-
-## How to run
-
-Open `index.html` in your browser. For best behavior, use VS Code Live Server.
-
-## Notes
-
-- Duplicate GSAP CDN imports were removed.
-- ScrollTrigger is loaded once before page scripts.
-- The navbar appears on the three main pages.
-- The CTA section no longer depends on CSS-only hidden state. JS sets and reveals it safely.
+Navbar behavior:
+- The navbar is divided into three visual areas.
+- Left area shows `HOME` only when the Home section is active.
+- Middle area shows `WHAT WE OFFER` only when the What We Offer section is active.
+- Right area shows `START YOUR PROJECT WITH US` only when the CTA section is active.
+- The duplicate CTA internal eyebrow line has been removed, so there is only one section-label navbar.

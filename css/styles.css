@@ -686,7 +686,7 @@
   }
 
 
-/* ── Shared Site Shell / Navbar ─────────────────────────────────── */
+/* ── Shared Site Shell / Premium Line Navbar ───────────────────── */
 html { scroll-behavior: smooth; }
 
 .site-navbar {
@@ -695,18 +695,17 @@ html { scroll-behavior: smooth; }
   left: 0;
   width: 100%;
   z-index: 9990;
-  padding: 18px 5vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(18, 18, 18, 0.72);
+  padding: 22px 4.2vw 20px;
+  background: rgba(18, 18, 18, 0.86);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .nav-logo {
+  display: inline-block;
   font-family: 'Bebas Neue', 'Impact', sans-serif;
   font-size: 1.7rem;
+  line-height: 1;
   letter-spacing: 2px;
   color: #fff;
   text-decoration: none;
@@ -715,36 +714,74 @@ html { scroll-behavior: smooth; }
 
 .nav-logo span { color: #c8ff00; }
 
+/* This is the navbar version of the marked WHAT WE OFFER line */
+.nav-line-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  width: 100%;
+  margin-top: 42px;
+}
+
 .nav-links {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-end;
+  gap: 34px;
+  flex: 0 0 auto;
+  padding-right: 18px;
 }
 
 .nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding-bottom: 12px;
   color: #a0a0a0;
   text-decoration: none;
   font-family: 'Syne', sans-serif;
   font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 1.3px;
   text-transform: uppercase;
-  padding: 10px 14px;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
   cursor: none;
+  transition: color 0.25s ease;
+  white-space: nowrap;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #c8ff00;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: #121212;
-  background: #c8ff00;
-  border-color: #c8ff00;
+  color: #ffffff;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.nav-faint-line {
+  flex: 1;
+  height: 1px;
+  margin-bottom: 0.5px;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .page-main {
-  padding-top: 84px;
+  padding-top: 150px;
   min-height: 100vh;
   background: #121212;
 }
@@ -752,7 +789,7 @@ html { scroll-behavior: smooth; }
 .page-main .featured-section,
 .page-main .brand-solution,
 .page-main .cta-section {
-  min-height: calc(100vh - 84px);
+  min-height: calc(100vh - 150px);
 }
 
 .page-main .featured-section {
@@ -851,15 +888,23 @@ html { scroll-behavior: smooth; }
 
 @media (max-width: 860px) {
   .site-navbar {
-    align-items: flex-start;
-    gap: 16px;
-    flex-direction: column;
+    padding: 18px 4.5vw 18px;
+  }
+
+  .nav-line-row {
+    margin-top: 30px;
   }
 
   .nav-links {
-    width: 100%;
+    max-width: 100%;
     overflow-x: auto;
+    gap: 26px;
+    padding-right: 16px;
     padding-bottom: 4px;
+  }
+
+  .nav-faint-line {
+    min-width: 80px;
   }
 
   .nav-link {
@@ -868,7 +913,7 @@ html { scroll-behavior: smooth; }
   }
 
   .page-main {
-    padding-top: 132px;
+    padding-top: 138px;
   }
 
   .solution-header-main {
@@ -913,5 +958,184 @@ html { scroll-behavior: smooth; }
 
   .floating-img {
     opacity: 0.65;
+  }
+}
+
+/* ── Single Page Scroll Spy Navbar Override ───────────────────── */
+.spy-navbar {
+  padding: 22px 4.2vw 18px;
+  background: rgba(18, 18, 18, 0.78);
+  backdrop-filter: blur(18px);
+  border-bottom: none;
+}
+
+.spy-navbar .nav-logo {
+  font-size: 1.7rem;
+}
+
+.spy-line-row {
+  margin-top: 38px;
+}
+
+.nav-current {
+  min-width: max-content;
+  padding-right: 18px;
+  color: #ffffff;
+  pointer-events: auto;
+}
+
+.nav-current::after {
+  transform: scaleX(1);
+}
+
+.single-page-main {
+  padding-top: 128px;
+}
+
+.single-page-main .snap-section {
+  min-height: 100vh;
+  scroll-margin-top: 130px;
+}
+
+.single-page-main .brand-solution {
+  padding-top: 90px;
+}
+
+.single-page-main .brand-solution .solution-header-main {
+  margin-bottom: 80px;
+}
+
+.single-page-main .featured-section {
+  min-height: calc(100vh - 128px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 860px) {
+  .spy-navbar {
+    padding: 18px 4.5vw 16px;
+  }
+
+  .spy-line-row {
+    margin-top: 28px;
+  }
+
+  .single-page-main {
+    padding-top: 118px;
+  }
+
+  .single-page-main .snap-section {
+    scroll-margin-top: 120px;
+  }
+
+  .nav-current {
+    font-size: 0.68rem;
+    max-width: 75vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* ── FINAL: Three-Part Scroll Spy Navbar ─────────────────────
+   Left slot = HOME, Center slot = WHAT WE OFFER, Right slot = START PROJECT.
+   Only the current section label is visible; the row stays as one clean navbar. */
+.spy-navbar {
+  padding: 22px 4.2vw 18px;
+  background: rgba(18, 18, 18, 0.82);
+  backdrop-filter: blur(18px);
+  border-bottom: none;
+}
+
+.spy-navbar .nav-logo {
+  font-size: 1.7rem;
+}
+
+.spy-zone-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
+  width: 100%;
+  margin-top: 38px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.spy-zone {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  min-height: 28px;
+  padding-bottom: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.spy-zone::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 2px;
+  background: #c8ff00;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.spy-zone-left { justify-self: start; }
+.spy-zone-center { justify-self: center; }
+.spy-zone-right { justify-self: end; }
+
+.spy-zone.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.spy-zone.active::after {
+  transform: scaleX(1);
+}
+
+/* Remove the duplicate internal CTA label line. The navbar now owns section labels. */
+.cta-top-divider {
+  display: none !important;
+}
+
+/* Keep the CTA vertically balanced after removing its inner eyebrow line. */
+.cta-heading {
+  margin-top: 0;
+}
+
+@media (max-width: 860px) {
+  .spy-navbar {
+    padding: 18px 4.5vw 16px;
+  }
+
+  .spy-zone-row {
+    margin-top: 28px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .spy-zone {
+    font-size: 0.6rem;
+    letter-spacing: 0.9px;
+    max-width: 32vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
